@@ -21,6 +21,7 @@ async function run() {
         console.log('db success cinect')
         const database = client.db('Tour_Buddy')
         const toursCollection = database.collection('tours');
+        const orderCollection = database.collection('Manage_Order')
 
 
         //Get Tours APi
@@ -31,7 +32,6 @@ async function run() {
         })
 
         //POST API
-
         app.post('/tours', async (req, res) => {
             const newUser = req.body;
             const result = await toursCollection.insertOne(newUser);
@@ -39,6 +39,24 @@ async function run() {
             console.log('addeded user', result);
             res.json(result);
         })
+
+        //Get Mange Order APi
+        app.get('/manageorder', async (req, res) => {
+            const cursor = orderCollection.find({});
+            const Manage_Order = await cursor.toArray();
+            res.send(Manage_Order);
+        })
+
+        //POST ORDER API
+        app.post('/manageorder', async (req, res) => {
+            const newOrder = req.body;
+            const result = await orderCollection.insertOne(newOrder);
+            console.log('Got new user', req.body);
+            console.log('addeded user', result);
+            res.json(result);
+        })
+
+
 
     }
     finally {
