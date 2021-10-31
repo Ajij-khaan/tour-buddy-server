@@ -30,6 +30,16 @@ async function run() {
             res.send(tours);
         })
 
+        //POST API
+
+        app.post('/tours', async (req, res) => {
+            const newUser = req.body;
+            const result = await toursCollection.insertOne(newUser);
+            console.log('Got new user', req.body);
+            console.log('addeded user', result);
+            res.json(result);
+        })
+
     }
     finally {
         // await client.close();
