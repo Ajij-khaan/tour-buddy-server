@@ -19,9 +19,20 @@ async function run() {
     try {
         await client.connect();
         console.log('db success cinect')
+        const database = client.db('Tour_Buddy')
+        const toursCollection = database.collection('tours');
+
+
+        //Get Tours APi
+        app.get('/tours', async (req, res) => {
+            const cursor = toursCollection.find({});
+            const tours = await cursor.toArray();
+            res.send(tours);
+        })
+
     }
     finally {
-        await client.close();
+        // await client.close();
     }
 
 }
