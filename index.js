@@ -37,8 +37,6 @@ async function run() {
             const newUser = req.body;
             const result = await toursCollection.insertOne(newUser);
             res.json(result);
-            // console.log('Got new user', req.body);
-            // console.log('addeded user', result);
         })
 
         //Get Mange Order APi
@@ -64,9 +62,6 @@ async function run() {
             const result = await orderCollection.deleteOne(query);
             res.json(result);
         })
-
-
-
     }
     finally {
         // await client.close();
