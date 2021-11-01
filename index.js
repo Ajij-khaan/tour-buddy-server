@@ -78,7 +78,7 @@ run().catch(console.dirr)
 
 
 app.get('/', (req, res) => {
-    res.send('Tour BUddy Server iS running');
+    res.send('Tour Buddy Server is Running');
 })
 
 app.listen(port, () => {
