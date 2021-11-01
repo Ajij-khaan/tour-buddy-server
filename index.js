@@ -19,7 +19,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
     try {
         await client.connect();
-        console.log('db success cinect')
+        // console.log('db success cinect')
         const database = client.db('Tour_Buddy')
         const toursCollection = database.collection('tours');
         const orderCollection = database.collection('Manage_Order')
@@ -36,9 +36,9 @@ async function run() {
         app.post('/tours', async (req, res) => {
             const newUser = req.body;
             const result = await toursCollection.insertOne(newUser);
-            console.log('Got new user', req.body);
-            console.log('addeded user', result);
             res.json(result);
+            // console.log('Got new user', req.body);
+            // console.log('addeded user', result);
         })
 
         //Get Mange Order APi
@@ -52,15 +52,14 @@ async function run() {
         app.post('/manageorder', async (req, res) => {
             const newOrder = req.body;
             const result = await orderCollection.insertOne(newOrder);
-            console.log('Got new user', req.body);
-            console.log('addeded user', result);
             res.json(result);
+            // console.log('Got new user', req.body);
+            // console.log('addeded user', result);
         })
 
         //Delete Mange Users
         app.delete('/manageorder/:id', async (req, res) => {
             const id = req.params.id;
-            console.log(id)
             const query = { _id: ObjectId(id) }
             const result = await orderCollection.deleteOne(query);
             res.json(result);
